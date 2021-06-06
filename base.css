@@ -1,0 +1,74 @@
+:root{
+    --mainCol : hsl(168 100% 50% / 1);
+    --darkCol : black;
+}
+body{
+    min-height: 100vh;
+    background-color:black;
+    display: grid;
+    place-items: center;
+}
+
+.myButton{
+    color:var(--mainCol);
+    display: block;
+    font-size:2rem;
+    font-family: sans-serif;
+    position:relative;
+    padding:0.5em 1em;
+    border-radius: 0.25em;
+    border: var(--mainCol) 0.125em solid;
+    text-decoration: none;
+
+    text-shadow: 
+    0 0 0.1em hsl(0 0% 100% / 0.4),
+    0 0 0.3em var(--mainCol);
+
+    box-shadow: 
+    inset 0 0 0.5em 0 var(--mainCol),
+    0 0 0.5em 0 var(--mainCol);
+    transition: 0.1s linear;
+}
+
+.myButton::before{
+    pointer-events: none;
+    content:'';
+    position:absolute;
+    background-color:var(--mainCol);
+    bottom:-110%;
+    left:0;
+    width:100%;
+    height:100%;
+
+    transform: perspective(1em) rotateX(30deg) scale(1,0.4);
+
+    filter: blur(1.3em);
+    opacity: 0.7;
+    transition: 0.2s linear;
+}
+
+.myButton::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 4em 0em var(--mainCol);
+    opacity: 0;
+    transition:opacity 0.1s linear;
+    background-color: var(--mainCol);
+    z-index: -1;
+}
+
+.myButton:hover,
+.myButton:focus{
+    color:var(--darkCol);
+    text-shadow: none;
+    margin-top:-1rem;
+    font-size: 2.2rem;
+}
+
+.myButton:hover::before{bottom:-120%; opacity:1;}
+
+.myButton:hover::after{opacity: 1;}
