@@ -1,5 +1,5 @@
 :root{
-    --mainCol : hsl(168 100% 50% / 1);
+    --mainCol : #00F0C5;
     --darkCol : black;
 }
 body{
@@ -47,6 +47,16 @@ body{
     transition: 0.2s linear;
 }
 
+@keyframes boxShadowAnimation{
+    from {box-shadow: 0 0 4em 0em var(--mainCol);}
+    to {box-shadow: 0 0 9em 0em var(--mainCol);}
+}
+
+@keyframes boxSizeAnimation{
+    from {transform: scale(1);}
+    to{transform: scale(1.08);}
+}
+
 .myButton::after{
     content: '';
     position: absolute;
@@ -56,7 +66,7 @@ body{
     right: 0;
     box-shadow: 0 0 4em 0em var(--mainCol);
     opacity: 0;
-    transition:opacity 0.1s linear;
+    transition:opacity 300ms linear;
     background-color: var(--mainCol);
     z-index: -1;
 }
@@ -64,9 +74,15 @@ body{
 .myButton:hover,
 .myButton:focus{
     color:var(--darkCol);
+    transition: color 300ms linear 300ms,
+        margin-top 300ms linear;
     text-shadow: none;
     margin-top:-1rem;
-    font-size: 2.2rem;
+    animation: boxSizeAnimation 1s ease-in-out 300ms infinite alternate;
+}
+
+.myButton:hover::after{
+    animation: boxShadowAnimation 1s ease-in-out 300ms infinite alternate;
 }
 
 .myButton:hover::before{bottom:-120%; opacity:1;}
